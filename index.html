@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SVG Icon Web Component</title>    <link rel="stylesheet" href="assets/css/styles.css" />
+    <!-- Prism.js for code highlighting -->
+    <link
+      id="prism-theme"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css"
+    />
+    <!-- Font Awesome for UI elements -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+      rel="stylesheet"
+    />    <!-- Include the SVG Web Component scripts -->
+    <script src="dist/icons.js"></script>
+    <script src="dist/svg-icon.js"></script>
+    
+    <!-- Theme initialization script to prevent FOUC -->
+    <script>
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme === 'light' || (savedTheme === null && !prefersDark)) {
+          document.documentElement.classList.add('light-mode');
+        } else {
+          document.documentElement.classList.add('dark-mode');
+        }
+      })();
+    </script>
+  </head>  <body>
+    <!-- Theme toggle -->
+    <button id="theme-toggle" class="theme-toggle" title="Toggle theme">
+      <i class="fas fa-sun"></i>
+    </button>
+
+    <header>
+      <div class="container">
+        <h1><span class="accent">SVG</span> Icon Web Component</h1>
+        <p class="tagline">
+          Lightweight, framework-agnostic SVG icons as Web Components
+        </p>
+        <div class="header-demo">
+          <svg-icon
+            name="home"
+            color="#64b5f6"
+            container_width="48px"
+            container_height="48px"
+          ></svg-icon>
+          <svg-icon
+            name="star"
+            color="#FFC107"
+            container_width="48px"
+            container_height="48px"
+          ></svg-icon>
+          <svg-icon
+            name="settings"
+            color="#4CAF50"
+            container_width="48px"
+            container_height="48px"
+          ></svg-icon>
+        </div>
+      </div>
+    </header>
+    <section id="features" class="container">
+      <h2>Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-puzzle-piece"></i>
+          </div>
+          <h3>Framework Agnostic</h3>
+          <p>
+            Use icons as Web Components across any framework (Angular, React,
+            Vue, plain JS)
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <h3>Dynamic Loading</h3>
+          <p>Dynamically load SVGs by icon name from a centralized registry</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-paint-brush"></i>
+          </div>
+          <h3>Customizable</h3>
+          <p>
+            Easily customize color, size, and container styles to match your
+            design system
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-feather"></i>
+          </div>
+          <h3>Lightweight</h3>
+          <p>Zero dependencies, minimal footprint, and optimized performance</p>
+        </div>
+      </div>    </section>
+
+    <section id="usage" class="container">
+      <h2>How to Use</h2>
+      <div class="usage-tabs">
+        <div class="tab-header">
+          <button class="tab-btn active" data-tab="vanilla">Vanilla JS</button>
+          <button class="tab-btn" data-tab="angular">Angular</button>
+          <button class="tab-btn" data-tab="react">React</button>
+          <button class="tab-btn" data-tab="vue">Vue.js</button>
+        </div>
+
+        <div class="tab-content">
+          <div class="tab-pane active" id="vanilla">
+            <pre><code class="language-html">
+&lt;!-- Step 1: Add the script files to your HTML -->
+&lt;head&gt;
+  &lt;!-- Include the SVG Icon Web Component scripts -->
+  &lt;script src="path/to/icons.js"&gt;&lt;/script&gt;
+  &lt;script src="path/to/svg-icon.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;!-- Step 2: Basic usage -->
+&lt;svg-icon name="home"&gt;&lt;/svg-icon&gt;
+
+&lt;!-- Step 3: Customized icon with properties -->
+&lt;svg-icon 
+    name="home" 
+    color="#ff5722" 
+    container_width="32px" 
+    container_height="32px"&gt;
+&lt;/svg-icon&gt;
+                    </code></pre>
+          </div>
+
+          <div class="tab-pane" id="angular">
+            <pre><code class="language-typescript">
+// Step 1: Add scripts to angular.json
+"scripts": [
+    "path/to/icons.js",
+    "path/to/svg-icon.js"
+]
+
+// Option A: Using NgModule
+// app.module.ts
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+
+@NgModule({
+    declarations: [...],
+    imports: [...],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],  // Allows using custom elements
+})
+export class AppModule {}
+
+// Option B: Using Standalone Component
+// my-component.ts
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+@Component({
+    selector: 'app-my-component',
+    standalone: true,
+    imports: [...],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+})
+                    </code></pre>
+          </div>
+
+          <div class="tab-pane" id="react">
+            <pre><code class="language-jsx">
+// In your main file (e.g., index.js or App.js)
+import 'path/to/icons.js';
+import 'path/to/svg-icon.js';
+
+// In your component
+function IconExample() {
+  return (
+    &lt;div&gt;
+      &lt;svg-icon name="home" color="#ff5722"&gt;&lt;/svg-icon&gt;
+    &lt;/div&gt;
+  );
+}
+
+// If using TypeScript, add the following to a .d.ts file:
+declare namespace JSX {
+  interface IntrinsicElements {
+    'svg-icon': any;
+  }
+}
+                    </code></pre>
+          </div>
+
+          <div class="tab-pane" id="vue">
+            <pre><code class="language-javascript">
+// main.js
+import 'path/to/icons.js';
+import 'path/to/svg-icon.js';
+
+// In .vue component template
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;svg-icon name="home" color="#ff5722"&gt;&lt;/svg-icon&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+// Define in Vue config (main.js)
+app.config.compilerOptions.isCustomElement = tag => tag.includes('-')
+                    </code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="component-properties" class="container">
+      <h2>Component Properties</h2>
+      <p>The SVG Icon Web Component accepts the following properties to customize its appearance and behavior:</p>
+      
+      <div class="properties-table-container">
+        <table class="properties-table">
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Description</th>
+              <th>Type</th>
+              <th>Optional</th>
+              <th>Default Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>name</code></td>
+              <td>Name of the icon to render</td>
+              <td><code>string</code></td>
+              <td>No</td>
+              <td><code>''</code></td>
+            </tr>
+            <tr>
+              <td><code>color</code></td>
+              <td>Fill color of the SVG paths</td>
+              <td><code>string</code></td>
+              <td>Yes</td>
+              <td><code>'#000'</code></td>
+            </tr>
+            <tr>
+              <td><code>view</code></td>
+              <td>Custom viewBox value</td>
+              <td><code>string</code></td>
+              <td>Yes</td>
+              <td><code>''</code></td>
+            </tr>
+            <tr>
+              <td><code>container_width</code></td>
+              <td>Width of the icon container</td>
+              <td><code>string</code></td>
+              <td>Yes</td>
+              <td><code>'20px'</code></td>
+            </tr>
+            <tr>
+              <td><code>container_height</code></td>
+              <td>Height of the icon container</td>
+              <td><code>string</code></td>
+              <td>Yes</td>
+              <td><code>'20px'</code></td>
+            </tr>
+            <tr>
+              <td><code>container_classes</code></td>
+              <td>Extra CSS classes for the container</td>
+              <td><code>string</code></td>
+              <td>Yes</td>
+              <td><code>''</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    
+    <section id="add-icons" class="container">
+      <h2>How to Add New Icons</h2>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Prepare Your SVG</h3>
+            <p>
+              Optimize your SVG file. For best results, export your icon from a design tool like Figma, Sketch, or Adobe Illustrator.
+            </p>
+            <pre><code class="language-svg">
+&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"&gt;
+  &lt;path </ul>d="M12 2L2 12h3v8h14v-8h3L12 2z" fill="currentColor"/&gt;
+&lt;/svg&gt;
+                    </code></pre>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Add SVG File</h3>
+            <p>Place your SVG file in the <code>icons/</code> folder</p>
+            <div class="folder-structure">
+              <pre><code class="language-text">
+icons/
+  ├── home.svg
+  ├── user.svg
+  ├── settings.svg
+  └── your-new-icon.svg  <!-- Add your icon here -->
+                        </code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Register the Icon</h3>
+            <p>
+              Add an entry to the <code>ICON_Files</code> object in
+              <code>icons.js</code>
+            </p>
+            <pre><code class="language-javascript">
+// Set the base path for icons
+ICON_Files_BasePath = 'icons/'; // Base path for icons   
+             
+// In dist/icons.js
+const ICON_Files = {
+  home: 'home.svg',
+  user: 'user.svg',
+  settings: 'settings.svg',
+  newIcon: 'your-new-icon.svg'  // Add your new icon here
+};
+                    </code></pre>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3>Use Your New Icon</h3>
+            <div class="code-demo">
+              <pre><code class="language-html">&lt;svg-icon name="newIcon" color="#64b5f6"&gt;&lt;/svg-icon&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="usage-section tips">
+        <h3>Best Practices</h3>
+        <ul class="tips-list">
+          <li>
+            <i class="fas fa-check-circle"></i>
+            <span
+              >Keep SVGs simple with minimal paths for better performance</span
+            >
+          </li>
+          <li>
+            <i class="fas fa-check-circle"></i>
+            <span
+              >Use consistent viewBox sizes (e.g., 24x24) for all icons</span
+            >
+          </li>
+          <li>
+            <i class="fas fa-check-circle"></i>
+            <span>Use semantically meaningful names for your icons</span>
+          </li>
+          <li>
+            <i class="fas fa-check-circle"></i>
+            <span>Use tools like SVGOMG to optimize your SVG files</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+    
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <h2><span class="accent">SVG</span> Icon</h2>
+            <p>v1.0.0</p>
+          </div>          <div class="footer-links">
+            <a
+              href="https://github.com/your-username/svg-icon-component"
+              target="_blank"
+            >
+              <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="#features">Features</a>
+            <a href="#usage">Usage</a>
+            <a href="#add-icons">Add Icons</a>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          <p>
+            &copy; 2025 SVG Icon Web Component. Created with
+            <svg-icon
+              name="heart"
+              color="#ff5252"
+              container_width="16px"
+              container_height="16px"
+            ></svg-icon>
+            Karim M. Mansour
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" class="back-to-top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Copy code functionality -->
+    <div id="copy-notification" class="copy-notification">
+      Copied to clipboard!
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-jsx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-markup.min.js"></script>
+    <script src="assets/js/script.js"></script>
+  </body>
+</html>
