@@ -1,4 +1,4 @@
-const ICON_Files_BasePath = '/assets/icons/'; // Base path for icons
+const ICON_Files_BasePath = 'assets/icons/'; // Base path for icons
 /**
  * A global mapping of icon names to their SVG file paths.
  * This object allows for centralized management of icon paths throughout the application.
